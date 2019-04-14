@@ -9,6 +9,7 @@ class ConstantRepository
 {
     public function get(string $name)
     {
+        // phpcs:ignore WordPressVIPMinimum.Constants.ConstantString.NotCheckingConstantName
         return defined($name)
             ? constant($name)
             : null;
