@@ -7,6 +7,11 @@ use Itineris\WPPHPMailer\Exceptions\NotFoundException;
 
 class ConstantRepository
 {
+    /**
+     * @param string $name
+     *
+     * @return mixed|null
+     */
     public function get(string $name)
     {
         // phpcs:ignore WordPressVIPMinimum.Constants.ConstantString.NotCheckingConstantName
@@ -15,6 +20,11 @@ class ConstantRepository
             : null;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
     public function getRequired(string $name)
     {
         $constant = $this->get($name);
