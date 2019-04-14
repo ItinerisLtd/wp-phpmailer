@@ -24,12 +24,9 @@ class ConfiguratorFactory
 
         $driver = (string) apply_filters(
             'wp_phpmailer_driver',
-            $constantRepo->getConstant('WP_PHPMAILER_DRIVER')
+            $constantRepo->get('WP_PHPMAILER_DRIVER')
         );
-        if ('' === $driver) {
-            // TODO!
-            wp_die('hello');
-        }
+        $config = ConfigFactory::make($constantRepo, $driver);
 
         /**
          * Whitelisted PHPMailer config (property names).
@@ -37,8 +34,6 @@ class ConfiguratorFactory
          * 'fromAddress', 'fromName', 'fromAuto' are special. Do not add them in mappings!
          */
         $mappings = (array) apply_filters('wp_phpmailer_config_mappings', static::MAPPINGS);
-
-        $config = ConfigFactory::make($constantRepo, $driver);
 
         return new Configurator($config, $mappings);
     }

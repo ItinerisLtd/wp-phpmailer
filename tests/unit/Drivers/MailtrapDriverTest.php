@@ -8,7 +8,7 @@ use Itineris\WPPHPMailer\Config;
 use Itineris\WPPHPMailer\ConstantRepository;
 use Mockery;
 
-class MailtrapTest extends Unit
+class MailtrapDriverTest extends Unit
 {
     public function testMakeConfig()
     {
@@ -17,10 +17,10 @@ class MailtrapTest extends Unit
 
         $configRepo = Mockery::mock(ConstantRepository::class);
 
-        $configRepo->expects()->getRequiredConstant('MAILTRAP_USERNAME')->andReturns($username);
-        $configRepo->expects()->getRequiredConstant('MAILTRAP_PASSWORD')->andReturns($password);
+        $configRepo->expects()->getRequired('MAILTRAP_USERNAME')->andReturns($username);
+        $configRepo->expects()->getRequired('MAILTRAP_PASSWORD')->andReturns($password);
 
-        $subject = Mailtrap::makeConfig($configRepo);
+        $subject = MailtrapDriver::makeConfig($configRepo);
 
         $this->assertInstanceOf(Config::class, $subject);
 

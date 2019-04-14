@@ -7,7 +7,7 @@ use Itineris\WPPHPMailer\Config;
 use Itineris\WPPHPMailer\ConfigInterface;
 use Itineris\WPPHPMailer\ConstantRepository;
 
-class SendGrid implements DriverInterface
+class SendGridDriver implements DriverInterface
 {
     public static function makeConfig(ConstantRepository $constantRepo): ConfigInterface
     {
@@ -21,20 +21,20 @@ class SendGrid implements DriverInterface
 
         $config->set(
             'password',
-            $constantRepo->getRequiredConstant('SENDGRID_API_KEY')
+            $constantRepo->getRequired('SENDGRID_API_KEY')
         );
 
         $config->set(
             'fromAddress',
-            $constantRepo->getConstant('SENDGRID_FROM_ADDRESS')
+            $constantRepo->get('SENDGRID_FROM_ADDRESS')
         );
         $config->set(
             'fromName',
-            $constantRepo->getConstant('SENDGRID_FROM_NAME')
+            $constantRepo->get('SENDGRID_FROM_NAME')
         );
         $config->set(
             'fromAuto',
-            $constantRepo->getConstant('SENDGRID_FROM_AUTO')
+            $constantRepo->get('SENDGRID_FROM_AUTO')
         );
 
         return $config;

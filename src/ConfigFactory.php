@@ -3,18 +3,17 @@ declare(strict_types=1);
 
 namespace Itineris\WPPHPMailer;
 
-use Itineris\WPPHPMailer\Drivers\DriverInterface;
-use Itineris\WPPHPMailer\Drivers\MailHog;
-use Itineris\WPPHPMailer\Drivers\Mailtrap;
-use Itineris\WPPHPMailer\Drivers\SendGrid;
-use RuntimeException;
+use Itineris\WPPHPMailer\Drivers\MailHogDriver;
+use Itineris\WPPHPMailer\Drivers\MailtrapDriver;
+use Itineris\WPPHPMailer\Drivers\SendGridDriver;
+use Itineris\WPPHPMailer\Exceptions\NotFoundException;
 
 class ConfigFactory
 {
     protected const DRIVERS = [
-        'mailhog' => MailHog::class,
-        'sendgrid' => SendGrid::class,
-        'mailtrap' => Mailtrap::class,
+        'mailhog' => MailHogDriver::class,
+        'sendgrid' => SendGridDriver::class,
+        'mailtrap' => MailtrapDriver::class,
     ];
 
     /** @var string[] */
@@ -28,10 +27,13 @@ class ConfigFactory
 
         $klass = $drivers[$driver] ?? null;
         if (null === $klass) {
-            throw new RuntimeException('todo');
-        }
-        if (! is_subclass_of($klass, DriverInterface::class)) {
-            throw new RuntimeException('todo');
+            $message = sprintf(
+                'Driver \'%1$s\' not found, acceptable values are: %2$s',
+                $driver,
+                implode($drivers, ', ')
+            );
+
+            throw new NotFoundException($message);
         }
 
         return $klass::makeConfig($constantRepo);

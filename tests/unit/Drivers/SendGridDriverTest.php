@@ -8,7 +8,7 @@ use Itineris\WPPHPMailer\Config;
 use Itineris\WPPHPMailer\ConstantRepository;
 use Mockery;
 
-class SendGridTest extends Unit
+class SendGridDriverTest extends Unit
 {
     public function testMakeConfig()
     {
@@ -16,10 +16,10 @@ class SendGridTest extends Unit
 
         $configRepo = Mockery::mock(ConstantRepository::class);
 
-        $configRepo->expects()->getRequiredConstant('SENDGRID_API_KEY')->andReturns($apiKey);
-        $configRepo->allows()->getConstant(Mockery::any())->andReturns(null);
+        $configRepo->expects()->getRequired('SENDGRID_API_KEY')->andReturns($apiKey);
+        $configRepo->allows()->get(Mockery::any())->andReturns(null);
 
-        $subject = SendGrid::makeConfig($configRepo);
+        $subject = SendGridDriver::makeConfig($configRepo);
 
         $this->assertInstanceOf(Config::class, $subject);
 
@@ -43,12 +43,12 @@ class SendGridTest extends Unit
 
         $configRepo = Mockery::mock(ConstantRepository::class);
 
-        $configRepo->expects()->getRequiredConstant('SENDGRID_API_KEY')->andReturns($apiKey);
-        $configRepo->expects()->getConstant('SENDGRID_FROM_ADDRESS')->andReturns($fromAddress);
-        $configRepo->expects()->getConstant('SENDGRID_FROM_NAME')->andReturns($fromName);
-        $configRepo->expects()->getConstant('SENDGRID_FROM_AUTO')->andReturns($fromAuto);
+        $configRepo->expects()->getRequired('SENDGRID_API_KEY')->andReturns($apiKey);
+        $configRepo->expects()->get('SENDGRID_FROM_ADDRESS')->andReturns($fromAddress);
+        $configRepo->expects()->get('SENDGRID_FROM_NAME')->andReturns($fromName);
+        $configRepo->expects()->get('SENDGRID_FROM_AUTO')->andReturns($fromAuto);
 
-        $subject = SendGrid::makeConfig($configRepo);
+        $subject = SendGridDriver::makeConfig($configRepo);
 
         $this->assertInstanceOf(Config::class, $subject);
 
