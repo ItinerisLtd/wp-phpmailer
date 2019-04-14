@@ -22,22 +22,11 @@ class ConfigFactory
     /** @var ConstantRepository */
     protected $constantRepo;
 
-    public static function make(ConstantRepository $constantRepo): self
+    public static function make(ConstantRepository $constantRepo, string $driver): ConfigInterface
     {
         $drivers = (array) apply_filters('wp_phpmailer_drivers', static::DRIVERS);
 
-        return new static($drivers, $constantRepo);
-    }
-
-    public function __construct(array $drivers, ConstantRepository $constantRepo)
-    {
-        $this->drivers = $drivers;
-        $this->constantRepo = $constantRepo;
-    }
-
-    public function makeConfig(string $driver): ConfigInterface
-    {
-        $klass = $this->drivers[$driver] ?? null;
+        $klass = $drivers[$driver] ?? null;
         if (null === $klass) {
             throw new RuntimeException('todo');
         }
@@ -45,7 +34,6 @@ class ConfigFactory
             throw new RuntimeException('todo');
         }
 
-        /** @var DriverInterface $klass */
-        return $klass::makeConfig($this->constantRepo);
+        return $klass::makeConfig($constantRepo);
     }
 }

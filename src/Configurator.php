@@ -7,38 +7,10 @@ use PHPMailer;
 
 class Configurator
 {
-    /**
-     * Whitelisted PHPMailer config (property names).
-     *
-     * 'fromAddress', 'fromName', 'fromAuto' are special. Do not add them in mappings!
-     */
-    protected const MAPPINGS = [
-        'SMTPAuth' => 'auth',
-        'SMTPSecure' => 'protocol',
-        'Host' => 'host',
-        'Port' => 'port',
-        'Username' => 'username',
-        'Password' => 'password',
-    ];
-
     /** @var ConfigInterface $config */
     protected $config;
     /** @var string[] $mappings */
     protected $mappings;
-
-    public static function init(string $driver, ConstantRepository $constantRepo): Configurator
-    {
-        /**
-         * Whitelisted PHPMailer config (property names).
-         *
-         * 'fromAddress', 'fromName', 'fromAuto' are special. Do not add them in mappings!
-         */
-        $mappings = (array) apply_filters('wp_phpmailer_config_mappings', static::MAPPINGS);
-        $configFactory = ConfigFactory::make($constantRepo);
-        $config = $configFactory->makeConfig($driver);
-
-        return new static($config, $mappings);
-    }
 
     public function __construct(ConfigInterface $config, array $mappings)
     {
