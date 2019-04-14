@@ -3,6 +3,9 @@
     "type": "wordpress-plugin",
     "description": "TODO.",
     "keywords": [
+        "email",
+        "phpmailer",
+        "smtp",
         "wordpress",
         "wp"
     ],

@@ -35,25 +35,155 @@
 
 ## Minimum Requirements
 
-- PHP v7.1
-- WordPress v5.0
+- PHP v7.2
+- WordPress v5.1
 
 ## Installation
 
 ### Composer (Recommended)
 
 ```sh-session
-$ composer require itinerisltd/wp-phpmailer
+composer require itinerisltd/wp-phpmailer
 ```
 
-### Classic
+### Build from Source
 
-Download `wp-phpmailer.zip` from [GitHub releases](https://github.com/itinerisltd/wp-phpmailer/releases)
-Then, [install as usual](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
+```sh-session
+# Make sure you use the same PHP version as remote servers.
+php -v
+
+# Checkout source code
+git clone https://github.com/ItinerisLtd/wp-phpmailer.git
+cd wp-phpmailer
+git checkout <the-tag-or-the-branch-or-the-commit>
+
+# Build the zip file
+composer release:build
+```
+
+Then, install `release/wp-phpmailer.zip` [as usual](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins).
 
 ## Usage
 
+Pick one driver and define its required constants in `wp-config.php`. 
+
+### Mailhog
+
+```php
+define('WP_PHPMAILER_DRIVER', 'mailhog');
+```
+
+### Mailtrap
+
+```php
+define('WP_PHPMAILER_DRIVER', 'mailtrap');
+
+define('MAILTRAP_USERNAME', 'your-mailtrap-username');
+define('MAILTRAP_PASSWORD', 'your-mailtrap-password');
+```
+
+### SendGrid
+
+```php
+define('WP_PHPMAILER_DRIVER', 'sendgrid');
+
+define('SENDGRID_API_KEY', 'your-sendgrid-api-key');
+
+// Optional. Useful if you have email authentication configurated.
+define('SENDGRID_FROM_ADDRESS', 'you@example.test');
+define('SENDGRID_FROM_NAME', 'John Doe');
+define('SENDGRID_FROM_AUTO', true);
+```
+
+## Custom Driver
+
+### Step 1. Define Your Driver
+
+```php
+class MyCustomDriver implements DriverInterface
+{
+    public static function makeConfig(ConstantRepository $constantRepo): ConfigInterface
+    {
+        $config = new Config();
+
+        $config->set('auth', true);
+        $config->set('host', 'smtp.custom.test');
+        $config->set('port', 587);
+        $config->set('protocol', 'tls');
+        
+        $config->set(
+            'username',
+            $constantRepo->getRequired('MY_CUSTOM_USERNAME')
+        );
+
+        $config->set(
+            'password',
+            $constantRepo->getRequired('MY_CUSTOM_PASSWORD')
+        );
+
+        $config->set(
+            'fromAddress',
+            $constantRepo->get('MY_CUSTOM_FROM_ADDRESS')
+        );
+        $config->set(
+            'fromName',
+            $constantRepo->get('MY_CUSTOM_FROM_NAME')
+        );
+        $config->set(
+            'fromAuto',
+            $constantRepo->get('MY_CUSTOM_FROM_AUTO')
+        );
+
+        return $config;
+    }
+}
+```
+
+### Step 2. Register Your Driver
+
+```php
+add_filter('wp_phpmailer_drivers', function (array $drivers): array {
+    $drivers['my-custom-driver'] = MyCustomDriver::class;
+    
+    return $drivers;
+});
+```
+
+### Step 3. Define Constants
+
+```php
+// wp-config.php
+
+define('WP_PHPMAILER_DRIVER', 'my-custom-driver');
+
+define('MY_CUSTOM_USERNAME', 'xxx');
+define('MY_CUSTOM_PASSWORD', 'xxx');
+
+// Optional.
+define('MY_CUSTOM_FROM_ADDRESS', 'xxx');
+define('MY_CUSTOM_FROM_NAME', 'xxx');
+define('MY_CUSTOM_FROM_AUTO', true);
+```
+
 ## FAQ
+
+### Where is the settings page?
+
+There is no settings page. 
+
+All configurations are done by [PHP constants](https://www.php.net/manual/en/language.constants.php) and [WordPress filters](https://codex.wordpress.org/Plugin_API/Filter_Reference).
+
+### What PHPMailer version bundled?
+
+This plugin reuse [the PHPMailer class bundled with WordPress core](https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-phpmailer.php).
+
+Thus, you have to keep WordPress core up-to-date to receive security patches.
+
+### Is it a must to use SMTP?
+
+No. 
+
+While you can make your own non-SMTP drivers, all default drivers are using SMTP. Pull requests are welcomed.
 
 ### Will you add support for older PHP versions?
 
@@ -84,9 +214,9 @@ Thanks! Glad you like it. It's important to let my boss knows somebody is using 
 ## Testing
 
 ```sh-session
-$ composer test
-$ composer phpstan:analyse
-$ composer style:check
+composer test
+composer phpstan:analyse
+composer style:check
 ```
 
 Pull requests without tests will not be accepted!
@@ -108,6 +238,8 @@ If you discover any security related issues, please email [hello@itineris.co.uk]
 ## Credits
 
 [WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) is a [Itineris Limited](https://www.itineris.co.uk/) project created by [Tang Rufus](https://typist.tech).
+
+Special thanks to [Brandon](https://log1x.com/) whose [WP SMTP](https://github.com/Log1x/wp-smtp) inspired this project.
 
 Full list of contributors can be found [here](https://github.com/ItinerisLtd/wp-phpmailer/graphs/contributors).
 
