@@ -8,7 +8,7 @@ use Itineris\WPPHPMailer\Exceptions\NotFoundException;
 class ConstantRepository
 {
     /**
-     * @param string $name
+     * @param string $name Name of the constant.
      *
      * @return mixed|null
      */
@@ -21,9 +21,11 @@ class ConstantRepository
     }
 
     /**
-     * @param string $name
+     * @param string $name Name of the constant.
      *
      * @return mixed
+     *
+     * @throws NotFoundException If constant not defined.
      */
     public function getRequired(string $name)
     {
