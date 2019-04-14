@@ -7,7 +7,7 @@ use Itineris\WPPHPMailer\Config;
 use Itineris\WPPHPMailer\ConfigInterface;
 use Itineris\WPPHPMailer\ConstantRepository;
 
-class MailHog implements DriverInterface
+class MailHogDriver implements DriverInterface
 {
     public static function makeConfig(ConstantRepository $constantRepo): ConfigInterface
     {

@@ -8,13 +8,13 @@ use Itineris\WPPHPMailer\Config;
 use Itineris\WPPHPMailer\ConstantRepository;
 use Mockery;
 
-class MailHogTest extends Unit
+class MailHogDriverTest extends Unit
 {
     public function testMakeConfig()
     {
         $configRepo = Mockery::mock(ConstantRepository::class);
 
-        $subject = MailHog::makeConfig($configRepo);
+        $subject = MailHogDriver::makeConfig($configRepo);
 
         $this->assertInstanceOf(Config::class, $subject);
 

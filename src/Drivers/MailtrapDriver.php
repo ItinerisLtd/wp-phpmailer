@@ -7,7 +7,7 @@ use Itineris\WPPHPMailer\Config;
 use Itineris\WPPHPMailer\ConfigInterface;
 use Itineris\WPPHPMailer\ConstantRepository;
 
-class Mailtrap implements DriverInterface
+class MailtrapDriver implements DriverInterface
 {
     public static function makeConfig(ConstantRepository $constantRepo): ConfigInterface
     {
@@ -20,11 +20,11 @@ class Mailtrap implements DriverInterface
 
         $config->set(
             'password',
-            $constantRepo->getRequiredConstant('MAILTRAP_PASSWORD')
+            $constantRepo->getRequired('MAILTRAP_PASSWORD')
         );
         $config->set(
             'username',
-            $constantRepo->getRequiredConstant('MAILTRAP_USERNAME')
+            $constantRepo->getRequired('MAILTRAP_USERNAME')
         );
 
         return $config;

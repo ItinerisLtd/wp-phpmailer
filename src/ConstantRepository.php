@@ -3,21 +3,40 @@ declare(strict_types=1);
 
 namespace Itineris\WPPHPMailer;
 
+use Itineris\WPPHPMailer\Exceptions\NotFoundException;
+
 class ConstantRepository
 {
-    public function getConstant(string $name)
+    /**
+     * @param string $name Name of the constant.
+     *
+     * @return mixed|null
+     */
+    public function get(string $name)
     {
+        // phpcs:ignore WordPressVIPMinimum.Constants.ConstantString.NotCheckingConstantName
         return defined($name)
             ? constant($name)
             : null;
     }
 
-    public function getRequiredConstant(string $name)
+    /**
+     * @param string $name Name of the constant.
+     *
+     * @return mixed
+     *
+     * @throws NotFoundException If constant not defined.
+     */
+    public function getRequired(string $name)
     {
-        $constant = $this->getConstant($name);
+        $constant = $this->get($name);
         if (null === $constant) {
-            // TODO!
-            wp_die('todo');
+            $message = sprintf(
+                'Required constant \'%1$s\' not found. Please define it in wp-config.php.',
+                $name
+            );
+
+            throw new NotFoundException($message);
         }
 
         return $constant;
