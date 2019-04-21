@@ -165,6 +165,17 @@ define('MY_CUSTOM_FROM_NAME', 'xxx');
 define('MY_CUSTOM_FROM_AUTO', true);
 ```
 
+## Common Errors
+
+### `NotFoundException` - `Driver 'xxx' not found, acceptable values are: aaa, bbb, ccc`
+
+Reason: Driver is not found or not defined.
+
+Troubleshooting:
+
+- Ensure PHP constant is `WP_PHPMAILER_DRIVER` is correct
+- Ensure filter `wp_phpmailer_driver` is functioning correctly
+
 ## FAQ
 
 ### Where is the settings page?

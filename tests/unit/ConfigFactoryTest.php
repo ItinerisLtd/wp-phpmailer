@@ -26,7 +26,7 @@ class ConfigFactoryTest extends Unit
             'mailtrap' => MailtrapDriver::class,
         ]);
 
-        $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: Itineris\WPPHPMailer\Drivers\MailHogDriver, Itineris\WPPHPMailer\Drivers\SendGridDriver, Itineris\WPPHPMailer\Drivers\MailtrapDriver");
+        $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: mailhog, sendgrid, mailtrap");
 
         $this->tester->expectThrowable($expected, function () use ($constantRepo, $driver): void {
             ConfigFactory::make($constantRepo, $driver);
