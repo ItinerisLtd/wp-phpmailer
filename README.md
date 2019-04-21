@@ -188,7 +188,7 @@ All configurations are done by [PHP constants](https://www.php.net/manual/en/lan
 
 This plugin reuse [the PHPMailer class bundled with WordPress core](https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-phpmailer.php).
 
-Thus, you have to keep WordPress core up-to-date to receive security patches.
+Thus, you have to keep WordPress core up to date to receive security patches.
 
 ### Is it a must to use SMTP?
 
