@@ -21,9 +21,10 @@ class ConfigFactory
     /** @var ConstantRepository */
     protected $constantRepo;
 
-    public static function make(ConstantRepository $constantRepo, string $driver): ConfigInterface
+    public static function make(ConstantRepository $constantRepo): ConfigInterface
     {
         $drivers = (array) apply_filters('wp_phpmailer_drivers', static::DRIVERS);
+        $driver = (string) $constantRepo->getRequired('WP_PHPMAILER_DRIVER');
 
         $klass = $drivers[$driver] ?? null;
         if (null === $klass) {

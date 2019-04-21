@@ -21,11 +21,7 @@ class ConfiguratorFactory
 
     public static function make(ConstantRepository $constantRepo): Configurator
     {
-        // TODO: Refactor!
-        $config = ConfigFactory::make(
-            $constantRepo,
-            (string) $constantRepo->get('WP_PHPMAILER_DRIVER')
-        );
+        $config = ConfigFactory::make($constantRepo);
 
         /**
          * Whitelisted PHPMailer configuration (property names).
