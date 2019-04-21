@@ -1,7 +1,7 @@
 {
     "name": "itinerisltd/wp-phpmailer",
     "type": "wordpress-plugin",
-    "description": "TODO.",
+    "description": "WP PHPMailer provides a clean, simple way to configure WordPress-bundled PHPMailer library, allowing you to quickly get started sending mail through a local or cloud based service of your choice.",
     "keywords": [
         "email",
         "phpmailer",

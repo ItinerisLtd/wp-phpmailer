@@ -29,6 +29,10 @@
         </properties>
     </rule>
 
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <exclude-pattern>/wp-phpmailer.php</exclude-pattern>
+    </rule>
+
     <rule ref="Squiz.Commenting.FileComment.MissingPackageTag">
         <exclude-pattern>/wp-phpmailer.php</exclude-pattern>
     </rule>
