@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Itineris\WPPHPMailer;
 
 use Itineris\WPPHPMailer\Exceptions\NotFoundException;
+use Itineris\WPPHPMailer\Util\Str;
 
 class ConstantRepository
 {
@@ -14,10 +15,17 @@ class ConstantRepository
      */
     public function get(string $name)
     {
+        $key = Str::screamingSnake($name);
+
         // phpcs:ignore WordPressVIPMinimum.Constants.ConstantString.NotCheckingConstantName
-        return defined($name)
-            ? constant($name)
+        $value = defined($key)
+            ? constant($key)
             : null;
+
+        return apply_filters(
+            Str::snake($name),
+            $value
+        );
     }
 
     /**
