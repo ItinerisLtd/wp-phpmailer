@@ -30,7 +30,10 @@ class ConfigFactory
             $message = sprintf(
                 'Driver \'%1$s\' not found, acceptable values are: %2$s',
                 $driver,
-                implode($drivers, ', ')
+                implode(
+                    array_keys($drivers),
+                    ', '
+                )
             );
 
             throw new NotFoundException($message);
