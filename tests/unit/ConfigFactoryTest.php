@@ -8,6 +8,7 @@ use Itineris\WPPHPMailer\Drivers\MailHogDriver;
 use Itineris\WPPHPMailer\Drivers\MailtrapDriver;
 use Itineris\WPPHPMailer\Drivers\SendGridDriver;
 use Itineris\WPPHPMailer\Exceptions\NotFoundException;
+use Mockery;
 use WP_Mock;
 
 class ConfigFactoryTest extends Unit
@@ -17,8 +18,13 @@ class ConfigFactoryTest extends Unit
 
     public function testThrowDriverNotFoundException(): void
     {
-        $constantRepo = new ConstantRepository();
-        $driver = 'non-exist-driver';
+        $constantRepo = Mockery::mock(
+            new ConstantRepository()
+        );
+        $constantRepo->expects('getRequired')
+            ->with('WP_PHPMAILER_DRIVER')
+            ->andReturn('non-exist-driver')
+            ->once();
 
         WP_Mock::expectFilter('wp_phpmailer_drivers', [
             'mailhog' => MailHogDriver::class,
@@ -28,15 +34,20 @@ class ConfigFactoryTest extends Unit
 
         $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: mailhog, sendgrid, mailtrap");
 
-        $this->tester->expectThrowable($expected, function () use ($constantRepo, $driver): void {
-            ConfigFactory::make($constantRepo, $driver);
+        $this->tester->expectThrowable($expected, function () use ($constantRepo): void {
+            ConfigFactory::make($constantRepo);
         });
     }
 
     public function testMake(): void
     {
-        $constantRepo = new ConstantRepository();
-        $driver = 'mailhog';
+        $constantRepo = Mockery::mock(
+            new ConstantRepository()
+        );
+        $constantRepo->expects('getRequired')
+                     ->with('WP_PHPMAILER_DRIVER')
+                     ->andReturn('mailhog')
+                     ->once();
 
         WP_Mock::expectFilter('wp_phpmailer_drivers', [
             'mailhog' => MailHogDriver::class,
@@ -45,7 +56,7 @@ class ConfigFactoryTest extends Unit
         ]);
 
         $expected = MailHogDriver::makeConfig($constantRepo);
-        $actual = ConfigFactory::make($constantRepo, $driver);
+        $actual = ConfigFactory::make($constantRepo);
 
         $this->assertEquals($expected, $actual);
     }

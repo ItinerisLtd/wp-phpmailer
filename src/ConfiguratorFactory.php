@@ -21,12 +21,7 @@ class ConfiguratorFactory
 
     public static function make(ConstantRepository $constantRepo): Configurator
     {
-
-        $driver = (string) apply_filters(
-            'wp_phpmailer_driver',
-            $constantRepo->get('WP_PHPMAILER_DRIVER')
-        );
-        $config = ConfigFactory::make($constantRepo, $driver);
+        $config = ConfigFactory::make($constantRepo);
 
         /**
          * Whitelisted PHPMailer configuration (property names).
