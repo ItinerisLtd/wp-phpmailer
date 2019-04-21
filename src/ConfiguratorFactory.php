@@ -6,7 +6,7 @@ namespace Itineris\WPPHPMailer;
 class ConfiguratorFactory
 {
     /**
-     * Whitelisted PHPMailer config (property names).
+     * Whitelisted PHPMailer configuration (property names).
      *
      * 'fromAddress', 'fromName', 'fromAuto' are special. Do not add them in mappings!
      */
@@ -29,7 +29,7 @@ class ConfiguratorFactory
         $config = ConfigFactory::make($constantRepo, $driver);
 
         /**
-         * Whitelisted PHPMailer config (property names).
+         * Whitelisted PHPMailer configuration (property names).
          *
          * 'fromAddress', 'fromName', 'fromAuto' are special. Do not add them in mappings!
          */

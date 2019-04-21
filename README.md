@@ -8,6 +8,8 @@
 [![Hire Itineris](https://img.shields.io/badge/Hire-Itineris-ff69b4.svg)](https://www.itineris.co.uk/contact/)
 
 
+[WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) provides a clean, simple way to configure [the WordPress-bundled PHPMailer library](https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-phpmailer.php), allowing you to quickly get started sending mail through a local or cloud based service of your choice.
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -16,12 +18,29 @@
 - [Minimum Requirements](#minimum-requirements)
 - [Installation](#installation)
   - [Composer (Recommended)](#composer-recommended)
-  - [Classic](#classic)
+  - [Build from Source](#build-from-source)
 - [Usage](#usage)
+  - [Mailhog](#mailhog)
+  - [Mailtrap](#mailtrap)
+  - [SendGrid](#sendgrid)
+- [Custom Driver](#custom-driver)
+  - [Step 1. Define Your Driver](#step-1-define-your-driver)
+  - [Step 2. Register Your Driver](#step-2-register-your-driver)
+  - [Step 3. Define Constants](#step-3-define-constants)
+- [Filters](#filters)
+  - [`wp_phpmailer_driver`](#wp_phpmailer_driver)
+  - [`wp_phpmailer_drivers`](#wp_phpmailer_drivers)
+  - [`wp_phpmailer_config_mappings`](#wp_phpmailer_config_mappings)
+- [Common Errors](#common-errors)
+  - [`NotFoundException` - `Driver 'xxx' not found, acceptable values are: aaa, bbb, ccc`](#notfoundexception---driver-xxx-not-found-acceptable-values-are-aaa-bbb-ccc)
 - [FAQ](#faq)
+  - [Where is the settings page?](#where-is-the-settings-page)
+  - [Will you add a settings page?](#will-you-add-a-settings-page)
+  - [What PHPMailer version bundled?](#what-phpmailer-version-bundled)
+  - [Is it a must to use SMTP?](#is-it-a-must-to-use-smtp)
   - [Will you add support for older PHP versions?](#will-you-add-support-for-older-php-versions)
   - [It looks awesome. Where can I find some more goodies like this?](#it-looks-awesome-where-can-i-find-some-more-goodies-like-this)
-  - [Besides wp.org, where can I give a :star::star::star::star::star: review?](#besides-wporg-where-can-i-give-a-starstarstarstarstar-review)
+  - [This isn't on wp.org. Where can I give a :star::star::star::star::star: review?](#this-isnt-on-wporg-where-can-i-give-a-starstarstarstarstar-review)
 - [Testing](#testing)
 - [Feedback](#feedback)
 - [Change Log](#change-log)
@@ -32,6 +51,27 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Goal
+
+Although WordPress bundles [the PHPMailer library](https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-phpmailer.php) which allow you sending mail through a local or cloud based service of your choice, different cloud based service requires different configuration.
+Worse still, most services provide multiple ways for setting them up. For instance, which [SendGrid](https://sendgrid.com/) SMTP port provides the highest level of security, `25`, `587`, `2525` or `465`?
+
+[WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) uses [the WordPress-bundled PHPMailer library](https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-phpmailer.php):
+
+- so you offload the responsibility of updating bundled libraries from plugin authors to WordPress core team and contributors
+  * at the time of writing, the official SendGrid plugin's [the vendor folder](https://github.com/sendgrid/wordpress/tree/master/vendor) hasn't been updated in 2.5 years
+  
+[WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) believes in [convention over configuration](https://rubyonrails.org/doctrine/#convention-over-configuration), we pick the best configuration for each service:
+
+- so you don't waste time going through the documents
+- so you don't have to figure out which port and protocol to use
+- so you don't miss any security configuration, e.g: `SMTPAuth`, `SMTPSecure`, etc
+  * unlike [the official Mailgun plugin](https://wordpress.org/plugins/mailgun/), there is no option of "Use secure SMTP" because nobody should be using insecure options  
+- so you only have to provide minimum information
+  * take SendGrid for example, only SendGrid API key (with "Mail Send" permission only) is required
+
+[WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) believes "a plugin does only one thing and does it well":
+
+- unlike [the official SendGrid plugin](https://wordpress.org/plugins/sendgrid-email-delivery-simplified/), [WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) doesn't include the subscription widget nor the stats dashboard
 
 ## Minimum Requirements
 
@@ -165,6 +205,68 @@ define('MY_CUSTOM_FROM_NAME', 'xxx');
 define('MY_CUSTOM_FROM_AUTO', true);
 ```
 
+## Filters
+
+### `wp_phpmailer_driver`
+
+`$driver = (string) apply_filters('wp_phpmailer_driver', string $wpPhpmailerDriver))`
+
+Filters the `WP_PHPMAILER_DRIVER` constant.
+
+Parameters:
+
+- $wpPhpmailerDriver
+  * (_string_) the value of `WP_PHPMAILER_DRIVER` constant
+
+### `wp_phpmailer_drivers`
+
+`$drivers = (array) apply_filters('wp_phpmailer_drivers', array $drivers)`
+
+Filters the available drivers array.
+
+Parameters:
+
+- $drivers
+  * (_array_) the available drivers array
+
+Example:
+ 
+ ```php
+add_filter('wp_phpmailer_drivers', function (array $drivers): array {
+    $drivers['my-custom-driver'] = MyCustomDriver::class;
+    
+    return $drivers;
+});
+ ```
+
+### `wp_phpmailer_config_mappings`
+
+`$mappings = (array) apply_filters('wp_phpmailer_config_mappings', array $mapings)`
+
+Filters the whitelisted PHPMailer configuration (property names) array.
+'fromAddress', 'fromName', 'fromAuto' are special. Do not add them in mappings!
+
+Parameters:
+
+- $mapings
+  * (_array_) the whitelisted PHPMailer configuration (property names)
+  
+Example:
+ 
+ ```php
+add_filter('wp_phpmailer_config_mappings', function (array $mappings): array {
+    $mappings['xxx'] = 'yyy';
+
+    return $mappings;
+});
+
+// The above filter results in:
+add_action( 'phpmailer_init', function (PHPMailer $phpmailer) {
+    // $this->config comes from `DriverInterface::makeConfig`.
+    $phpmailer->xxx = $this->config->get('yyy');     
+});
+ ```
+
 ## Common Errors
 
 ### `NotFoundException` - `Driver 'xxx' not found, acceptable values are: aaa, bbb, ccc`
@@ -182,13 +284,23 @@ Troubleshooting:
 
 There is no settings page. 
 
-All configurations are done by [PHP constants](https://www.php.net/manual/en/language.constants.php) and [WordPress filters](https://codex.wordpress.org/Plugin_API/Filter_Reference).
+All configurations are done by [PHP constants](https://www.php.net/manual/en/language.constants.php) and [WordPress filters](#filters).
+
+### Will you add a settings page?
+
+No.
+
+We have seen [countless](https://blog.sucuri.net/2019/03/0day-vulnerability-in-easy-wp-smtp-affects-thousands-of-sites.html) [vulnerabilities](https://www.pluginvulnerabilities.com/2016/04/04/when-full-disclosure-of-a-claimed-wordpress-plugin-vulnerability-leads-to-a-bigger-problem/) [related](https://www.wordfence.com/blog/2019/03/recent-social-warfare-vulnerability-allowed-remote-code-execution/) [to](https://www.wordfence.com/blog/2018/11/privilege-escalation-flaw-in-wp-gdpr-compliance-plugin-exploited-in-the-wild/) user inputs.
+Mail settings don't change often and should be configured by a developer.
+Therefore, [WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) decided to use PHP constants instead of storing options in WordPress database.
+
+However, if you must, you can use [filters](#filters) to override this behavior.
 
 ### What PHPMailer version bundled?
 
 This plugin reuse [the PHPMailer class bundled with WordPress core](https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-phpmailer.php).
 
-Thus, you have to keep WordPress core up-to-date to receive security patches.
+Thus, you have to keep WordPress core up to date to receive security patches.
 
 ### Is it a must to use SMTP?
 
@@ -210,14 +322,13 @@ Don't use it on **end of life** or **security fixes only** PHP versions.
 - Follow [@itineris_ltd](https://twitter.com/itineris_ltd) and [@TangRufus](https://twitter.com/tangrufus) on Twitter
 - Hire [Itineris](https://www.itineris.co.uk/services/) to build your next awesome site
 
-### Besides wp.org, where can I give a :star::star::star::star::star: review?
+### This isn't on wp.org. Where can I give a :star::star::star::star::star: review?
 
 Thanks! Glad you like it. It's important to let my boss knows somebody is using this project. Please consider:
 
-- give :star::star::star::star::star: reviews on [wp.org](https://wordpress.org/support/plugin/wp-phpmailer/reviews/#new-post)
 - tweet something good with mentioning [@itineris_ltd](https://twitter.com/itineris_ltd) and [@TangRufus](https://twitter.com/tangrufus)
-- ️️:star: star this [Github repo](https://github.com/ItinerisLtd/wp-phpmailer)
-- watch this [Github repo](https://github.com/ItinerisLtd/wp-phpmailer)
+- :star: star this [Github repo](https://github.com/ItinerisLtd/wp-phpmailer)
+- :eyes: watch this [Github repo](https://github.com/ItinerisLtd/wp-phpmailer)
 - write blog posts
 - submit [pull requests](https://github.com/ItinerisLtd/wp-phpmailer)
 - [hire Itineris](https://www.itineris.co.uk/services/)
