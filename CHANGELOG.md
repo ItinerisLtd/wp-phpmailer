@@ -1,6 +1,19 @@
 # Change Log
 
+## [0.1.0](https://github.com/ItinerisLtd/wp-phpmailer/tree/0.1.0) (2019-04-24)
+**Closed issues:**
 
+- Explain the goals [\#4](https://github.com/ItinerisLtd/wp-phpmailer/issues/4)
+- Mark composer conflicts [\#3](https://github.com/ItinerisLtd/wp-phpmailer/issues/3)
+
+**Merged pull requests:**
+
+- Composer: Mark `conflict` [\#8](https://github.com/ItinerisLtd/wp-phpmailer/pull/8) ([TangRufus](https://github.com/TangRufus))
+- Add filter to `ConstantRepository` [\#7](https://github.com/ItinerisLtd/wp-phpmailer/pull/7) ([TangRufus](https://github.com/TangRufus))
+- Readme: Explain the goals, filters and others  [\#6](https://github.com/ItinerisLtd/wp-phpmailer/pull/6) ([TangRufus](https://github.com/TangRufus))
+- Better driver not found error message [\#5](https://github.com/ItinerisLtd/wp-phpmailer/pull/5) ([TangRufus](https://github.com/TangRufus))
+- Update misc [\#2](https://github.com/ItinerisLtd/wp-phpmailer/pull/2) ([TangRufus](https://github.com/TangRufus))
+- Refactor [\#1](https://github.com/ItinerisLtd/wp-phpmailer/pull/1) ([TangRufus](https://github.com/TangRufus))
 
 
 
