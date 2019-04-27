@@ -58,14 +58,14 @@ Worse still, most services provide multiple ways for setting them up. For instan
 [WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) uses [the WordPress-bundled PHPMailer library](https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-phpmailer.php):
 
 - so you offload the responsibility of updating bundled libraries from plugin authors to WordPress core team and contributors
-  * at the time of writing, the official SendGrid plugin's [the vendor folder](https://github.com/sendgrid/wordpress/tree/master/vendor) hasn't been updated in 2.5 years
+  * at the time of writing, the official SendGrid plugin's [vendor folder](https://github.com/sendgrid/wordpress/tree/master/vendor) hasn't been updated in 2.5 years
   
 [WP PHPMailer](https://github.com/ItinerisLtd/wp-phpmailer) believes in [convention over configuration](https://rubyonrails.org/doctrine/#convention-over-configuration), we pick the best configuration for each service:
 
 - so you don't waste time going through the documents
 - so you don't have to figure out which port and protocol to use
 - so you don't miss any security configuration, e.g: `SMTPAuth`, `SMTPSecure`, etc
-  * unlike [the official Mailgun plugin](https://wordpress.org/plugins/mailgun/), there is no option of "Use secure SMTP" because nobody should be using insecure options  
+  * unlike [the official Mailgun plugin](https://wordpress.org/plugins/mailgun/), there is no "use secure SMTP" option because nobody should be using insecure options  
 - so you only have to provide minimum information
   * take SendGrid for example, only SendGrid API key (with "Mail Send" permission only) is required
 
@@ -310,7 +310,7 @@ While you can make your own non-SMTP drivers, all default drivers are using SMTP
 
 ### Will you add support for older PHP versions?
 
-Never! This plugin will only works on [actively supported PHP versions](https://secure.php.net/supported-versions.php).
+Never! This plugin will only work on [actively supported PHP versions](https://secure.php.net/supported-versions.php).
 
 Don't use it on **end of life** or **security fixes only** PHP versions.
 
