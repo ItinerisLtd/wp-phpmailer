@@ -355,7 +355,7 @@ Please see [CHANGELOG](./CHANGELOG.md) for more information on what has changed 
 
 ## Security
 
-If you discover any security related issues, please email [hello@itineris.co.uk](hello@itineris.co.uk) instead of using the issue tracker.
+If you discover any security related issues, please email [hello@itineris.co.uk](mailto:hello@itineris.co.uk) instead of using the issue tracker.
 
 ## Credits
 
