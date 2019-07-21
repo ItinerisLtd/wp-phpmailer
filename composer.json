@@ -74,6 +74,8 @@
     },
     "prefer-stable": true,
     "scripts": {
+        "post-install-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
+        "post-update-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
         "phpstan:analyse": "phpstan analyse",
         "pretag": [
             "composer update",
