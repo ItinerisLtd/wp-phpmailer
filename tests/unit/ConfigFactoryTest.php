@@ -28,8 +28,9 @@ class ConfigFactoryTest extends Unit
 
         WP_Mock::expectFilter('wp_phpmailer_drivers', [
             'mailhog' => MailHogDriver::class,
-            'sendgrid' => SendGridDriver::class,
             'mailtrap' => MailtrapDriver::class,
+            'office365' => Office365Driver::class,
+            'sendgrid' => SendGridDriver::class,
         ]);
 
         $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: mailhog, sendgrid, mailtrap");
