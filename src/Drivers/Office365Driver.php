@@ -14,7 +14,7 @@ class Office365Driver implements DriverInterface
         $config = new Config();
 
         $config->set('auth', true);
-        $config->set('host', 'smtp.office356.com');
+        $config->set('host', 'smtp.office365.com');
         $config->set('port', 587);
         $config->set('protocol', 'tls');
 
