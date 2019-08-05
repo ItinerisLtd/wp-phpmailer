@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.1.2](https://github.com/ItinerisLtd/wp-phpmailer/tree/0.1.2) (2019-08-05)
+[Full Changelog](https://github.com/ItinerisLtd/wp-phpmailer/compare/0.1.1...0.1.2)
+
+**Merged pull requests:**
+
+- Office 365 [\#21](https://github.com/ItinerisLtd/wp-phpmailer/pull/21) ([BufferOverNo](https://github.com/BufferOverNo))
+
 ## [0.1.1](https://github.com/ItinerisLtd/wp-phpmailer/tree/0.1.1) (2019-08-05)
 [Full Changelog](https://github.com/ItinerisLtd/wp-phpmailer/compare/0.1.0...0.1.1)
 
@@ -9,6 +16,7 @@
 
 **Merged pull requests:**
 
+- Version bump 0.1.1 [\#20](https://github.com/ItinerisLtd/wp-phpmailer/pull/20) ([TangRufus](https://github.com/TangRufus))
 - Add Office365 [\#19](https://github.com/ItinerisLtd/wp-phpmailer/pull/19) ([BufferOverNo](https://github.com/BufferOverNo))
 - Readme: Fix email link [\#16](https://github.com/ItinerisLtd/wp-phpmailer/pull/16) ([TangRufus](https://github.com/TangRufus))
 - Composer: Use `codeception/codeception` instead of `codeception/base` [\#15](https://github.com/ItinerisLtd/wp-phpmailer/pull/15) ([TangRufus](https://github.com/TangRufus))
