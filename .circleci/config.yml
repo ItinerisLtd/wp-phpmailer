@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  composer: itinerisltd/composer@0
+  composer: itinerisltd/composer@0.3
 
 workflows:
   test:
@@ -15,7 +15,7 @@ workflows:
 
       - composer/install:
           name: test-7.2
-          executor: composer/seven_two
+          executor: composer/php-72
           post-steps:
             - composer/exec:
                 command: test
