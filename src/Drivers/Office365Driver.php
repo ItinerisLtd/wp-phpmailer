@@ -18,7 +18,8 @@ class Office365Driver implements DriverInterface
         $config->set('port', 587);
         $config->set('protocol', 'tls');
 
-        $config->set('username',
+        $config->set(
+            'username',
             $constantRepo->getRequired('OFFICE_USERNAME')
         );
 
