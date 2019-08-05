@@ -1,5 +1,22 @@
 # Change Log
 
+## [0.1.1](https://github.com/ItinerisLtd/wp-phpmailer/tree/0.1.1) (2019-08-05)
+[Full Changelog](https://github.com/ItinerisLtd/wp-phpmailer/compare/0.1.0...0.1.1)
+
+**Closed issues:**
+
+- Dependabot can't resolve your PHP dependency files [\#14](https://github.com/ItinerisLtd/wp-phpmailer/issues/14)
+
+**Merged pull requests:**
+
+- Add Office365 [\#19](https://github.com/ItinerisLtd/wp-phpmailer/pull/19) ([BufferOverNo](https://github.com/BufferOverNo))
+- Readme: Fix email link [\#16](https://github.com/ItinerisLtd/wp-phpmailer/pull/16) ([TangRufus](https://github.com/TangRufus))
+- Composer: Use `codeception/codeception` instead of `codeception/base` [\#15](https://github.com/ItinerisLtd/wp-phpmailer/pull/15) ([TangRufus](https://github.com/TangRufus))
+- composer require --dev codeception/base phpunit/phpunit:8.1.x [\#13](https://github.com/ItinerisLtd/wp-phpmailer/pull/13) ([TangRufus](https://github.com/TangRufus))
+- Update codeception/base requirement from ^2.5 to ^3.0 [\#12](https://github.com/ItinerisLtd/wp-phpmailer/pull/12) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Composer: Fix `homepage` url [\#11](https://github.com/ItinerisLtd/wp-phpmailer/pull/11) ([TangRufus](https://github.com/TangRufus))
+- Readme: Fix English [\#10](https://github.com/ItinerisLtd/wp-phpmailer/pull/10) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.1.0](https://github.com/ItinerisLtd/wp-phpmailer/tree/0.1.0) (2019-04-24)
 **Closed issues:**
 
@@ -8,6 +25,7 @@
 
 **Merged pull requests:**
 
+- Version bump 0.1.0 [\#9](https://github.com/ItinerisLtd/wp-phpmailer/pull/9) ([TangRufus](https://github.com/TangRufus))
 - Composer: Mark `conflict` [\#8](https://github.com/ItinerisLtd/wp-phpmailer/pull/8) ([TangRufus](https://github.com/TangRufus))
 - Add filter to `ConstantRepository` [\#7](https://github.com/ItinerisLtd/wp-phpmailer/pull/7) ([TangRufus](https://github.com/TangRufus))
 - Readme: Explain the goals, filters and others  [\#6](https://github.com/ItinerisLtd/wp-phpmailer/pull/6) ([TangRufus](https://github.com/TangRufus))
