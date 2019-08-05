@@ -5,6 +5,7 @@ namespace Itineris\WPPHPMailer;
 
 use Itineris\WPPHPMailer\Drivers\MailHogDriver;
 use Itineris\WPPHPMailer\Drivers\MailtrapDriver;
+use Itineris\WPPHPMailer\Drivers\Office365Driver;
 use Itineris\WPPHPMailer\Drivers\SendGridDriver;
 use Itineris\WPPHPMailer\Exceptions\NotFoundException;
 
@@ -14,6 +15,7 @@ class ConfigFactory
         'mailhog' => MailHogDriver::class,
         'sendgrid' => SendGridDriver::class,
         'mailtrap' => MailtrapDriver::class,
+        'office365' => Office365Driver::class,
     ];
 
     /** @var string[] */
