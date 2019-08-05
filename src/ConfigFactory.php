@@ -13,9 +13,9 @@ class ConfigFactory
 {
     protected const DRIVERS = [
         'mailhog' => MailHogDriver::class,
-        'sendgrid' => SendGridDriver::class,
         'mailtrap' => MailtrapDriver::class,
         'office365' => Office365Driver::class,
+        'sendgrid' => SendGridDriver::class,
     ];
 
     /** @var string[] */
