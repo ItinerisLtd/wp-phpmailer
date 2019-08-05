@@ -6,6 +6,7 @@ namespace Itineris\WPPHPMailer;
 use Codeception\Test\Unit;
 use Itineris\WPPHPMailer\Drivers\MailHogDriver;
 use Itineris\WPPHPMailer\Drivers\MailtrapDriver;
+use Itineris\WPPHPMailer\Drivers\Office365Driver;
 use Itineris\WPPHPMailer\Drivers\SendGridDriver;
 use Itineris\WPPHPMailer\Exceptions\NotFoundException;
 use Mockery;
@@ -33,7 +34,7 @@ class ConfigFactoryTest extends Unit
             'sendgrid' => SendGridDriver::class,
         ]);
 
-        $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: mailhog, sendgrid, mailtrap");
+        $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: mailhog, mailtrap, office365, sendgrid");
 
         $this->tester->expectThrowable($expected, function () use ($constantRepo): void {
             ConfigFactory::make($constantRepo);
@@ -52,8 +53,9 @@ class ConfigFactoryTest extends Unit
 
         WP_Mock::expectFilter('wp_phpmailer_drivers', [
             'mailhog' => MailHogDriver::class,
-            'sendgrid' => SendGridDriver::class,
             'mailtrap' => MailtrapDriver::class,
+            'office365' => Office365Driver::class,
+            'sendgrid' => SendGridDriver::class,
         ]);
 
         $expected = MailHogDriver::makeConfig($constantRepo);
