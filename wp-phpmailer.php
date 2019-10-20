@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:     WP PHPMailer
  * Plugin URI:      https://github.com/ItinerisLtd/wp-phpmailer
