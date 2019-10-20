@@ -3,6 +3,45 @@ version: 2.1
 orbs:
   composer: itinerisltd/composer@0.3
 
+  itinerisltd:
+    orbs:
+      composer: itinerisltd/composer@0.3
+
+    executors:
+      default:
+        docker:
+          - image: 'cibuilds/github:latest'
+
+    jobs:
+      lint-wp-org:
+        parameters:
+          zip:
+            type: string
+            description: path to plugin zip file
+          executor:
+            type: executor
+            default: composer/php-72
+        executor: << parameters.executor >>
+        steps:
+          - run: unzip << parameters.zip >> -d /tmp/plugin-source-code
+          - run: find /tmp/plugin-source-code -name "*.php" -print0 | xargs -n 1 -0 php -l
+      publish-to-github-releases:
+        parameters:
+          github_token:
+            type: string
+            description: GitHub personal access token. For a private repository you need `repo` scope and for a public repository you need `public_repo` scope
+            default: ${GITHUB_TOKEN}
+          artifact_dir:
+            type: string
+            description: directory path of the artifacts to be uploaded
+            default: .
+          executor:
+            type: executor
+            default: default
+        executor: << parameters.executor >>
+        steps:
+          - run: ghr -t << parameters.github_token >> -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -soft ${CIRCLE_TAG} << parameters.artifact_dir >>
+
 workflows:
   test:
     jobs:
@@ -31,3 +70,49 @@ workflows:
           post-steps:
             - composer/exec:
                 command: phpstan:analyse
+
+  # TODO: Extract orbs
+  # TODO: Commit wo.org svn
+  build_release:
+    jobs:
+      - composer/install:
+          name: build
+          # Build with lowest support PHP version
+          # wp.org svn pre-commit hook rejects PHP 7.3+ syntax
+          executor: composer/php-72
+          post-steps:
+            - composer/exec:
+                command: release:build
+            - store_artifacts:
+                path: release
+            - persist_to_workspace:
+                root: ~/project
+                paths:
+                  - release/*.zip
+          filters:
+            tags:
+              only: /.*/
+      - itinerisltd/lint-wp-org:
+          name: lint-wp-org
+          requires:
+            - build
+          zip: release/wp-phpmailer.zip
+          pre-steps:
+            - attach_workspace:
+                at: ~/project
+          filters:
+            tags:
+              only: /.*/
+      - itinerisltd/publish-to-github-releases:
+          requires:
+            - build
+            - lint-wp-org
+          artifact_dir: release
+          pre-steps:
+            - attach_workspace:
+                at: ~/project
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
