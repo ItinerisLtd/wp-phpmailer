@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WPPHPMailer">
+<ruleset name="Plugin">
     <file>./</file>
     <exclude-pattern>/release/*</exclude-pattern>
     <exclude-pattern>/tests/*</exclude-pattern>
@@ -21,7 +21,7 @@
     <!-- Use Itineris WP Coding Standards -->
     <rule ref="Itineris"/>
 
-    <config name="minimum_supported_wp_version" value="5.0"/>
+    <config name="minimum_supported_wp_version" value="5.1"/>
 
     <rule ref="WordPress.WP.I18n">
         <properties>
@@ -30,10 +30,6 @@
     </rule>
 
     <rule ref="Generic.Files.LineLength.TooLong">
-        <exclude-pattern>/wp-phpmailer.php</exclude-pattern>
-    </rule>
-
-    <rule ref="Squiz.Commenting.FileComment.MissingPackageTag">
         <exclude-pattern>/wp-phpmailer.php</exclude-pattern>
     </rule>
 </ruleset>
