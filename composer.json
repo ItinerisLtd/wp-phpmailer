@@ -40,7 +40,7 @@
         "phpstan/phpstan": "^0.11.4",
         "phpstan/phpstan-strict-rules": "^0.11.0",
         "roave/security-advisories": "dev-master",
-        "roots/wordpress": "^5.1"
+        "szepeviktor/phpstan-wordpress": "dev-master"
     },
     "config": {
         "sort-packages": true
@@ -73,6 +73,8 @@
     },
     "prefer-stable": true,
     "scripts": {
+        "post-install-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
+        "post-update-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
         "phpstan:analyse": "phpstan analyse",
         "pretag": [
             "composer update",

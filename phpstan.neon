@@ -1,15 +1,11 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
     level: max
+    inferPrivatePropertyTypeFromConstructor: true
     paths:
-        - %rootDir%/../../../src
-    autoload_directories:
-        - %rootDir%/../../../wordpress
-
-    autoload_files:
-        - %rootDir%/../../../wordpress/wp-includes/plugin.php
-
+        - %currentWorkingDirectory%/src/
     ignoreErrors:
-        - '#Variable property access on PHPMailer.#'
-
-includes:
-    - vendor/phpstan/phpstan-strict-rules/rules.neon
+        - '#^Variable property access on PHPMailer\.$#'
