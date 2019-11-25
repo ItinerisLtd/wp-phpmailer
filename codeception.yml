@@ -10,6 +10,5 @@ extensions:
     enabled:
         - Codeception\Extension\RunFailed
 settings:
-    bootstrap: _bootstrap.php
     shuffle: true
     colors: true
