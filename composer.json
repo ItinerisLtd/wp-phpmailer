@@ -14,7 +14,7 @@
     "authors": [
         {
             "name": "Itineris Limited",
-            "email": "hello@itineris.co.uk",
+            "email": "dev@itineris.co.uk",
             "homepage": "https://itineris.co.uk/",
             "role": "Company"
         },
@@ -94,7 +94,7 @@
         "test": "codecept run"
     },
     "support": {
-        "email": "hello@itineris.co.uk",
+        "email": "dev@itineris.co.uk",
         "issues": "https://github.com/ItinerisLtd/wp-phpmailer/issues",
         "source": "https://github.com/ItinerisLtd/wp-phpmailer"
     }
