@@ -539,16 +539,16 @@
         },
         {
             "name": "itinerisltd/itineris-wp-coding-standards",
-            "version": "0.3.2",
+            "version": "0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ItinerisLtd/itineris-wp-coding-standards.git",
-                "reference": "9fcbc46459c5b6674221ffe057f5317e1633ba80"
+                "reference": "12d54c1ca851bd16a30c2303bf172c749ed26c8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ItinerisLtd/itineris-wp-coding-standards/zipball/9fcbc46459c5b6674221ffe057f5317e1633ba80",
-                "reference": "9fcbc46459c5b6674221ffe057f5317e1633ba80",
+                "url": "https://api.github.com/repos/ItinerisLtd/itineris-wp-coding-standards/zipball/12d54c1ca851bd16a30c2303bf172c749ed26c8b",
+                "reference": "12d54c1ca851bd16a30c2303bf172c749ed26c8b",
                 "shasum": ""
             },
             "require": {
@@ -590,7 +590,7 @@
                 "standards",
                 "wordpress"
             ],
-            "time": "2019-11-24T17:14:02+00:00"
+            "time": "2019-12-16T12:56:14+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
