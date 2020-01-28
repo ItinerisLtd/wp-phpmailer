@@ -10,9 +10,15 @@ class Configurator
 {
     /** @var ConfigInterface $config */
     protected $config;
-    /** @var string[] $mappings */
+    /** @var array<string, string> $mappings */
     protected $mappings;
 
+    /**
+     * Configurator constructor.
+     *
+     * @param ConfigInterface       $config   The config instance.
+     * @param array<string, string> $mappings The mappings.
+     */
     public function __construct(ConfigInterface $config, array $mappings)
     {
         $this->config = $config;

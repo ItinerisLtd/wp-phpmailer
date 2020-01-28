@@ -9,7 +9,7 @@ class Str
     /**
      * The cache of screaming-snake-cased words.
      *
-     * @var array
+     * @var array<string, array<string, string>>
      */
     protected static $screamingSnakeCache = [];
 
@@ -18,7 +18,7 @@ class Str
         $delimiter = '_';
         $key = $value;
 
-        if (! isset(static::$screamingSnakeCache[$key][$delimiter])) {
+        if (! is_string(static::$screamingSnakeCache[$key][$delimiter] ?? null)) {
             $value = mb_strtoupper($value, 'UTF-8');
             $value = preg_replace('/[^\w]+/u', $delimiter, $value);
 

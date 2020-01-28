@@ -7,9 +7,9 @@ namespace Itineris\WPPHPMailer;
 class Config implements ConfigInterface
 {
     /**
-     * @see Configurator::MAPPINGS
+     * @see ConfiguratorFactory::MAPPINGS
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $config = [];
 

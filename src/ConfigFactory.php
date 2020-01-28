@@ -19,7 +19,7 @@ class ConfigFactory
         'sendgrid' => SendGridDriver::class,
     ];
 
-    /** @var string[] */
+    /** @var array<string, string> */
     protected $drivers;
     /** @var ConstantRepository */
     protected $constantRepo;
@@ -35,8 +35,8 @@ class ConfigFactory
                 'Driver \'%1$s\' not found, acceptable values are: %2$s',
                 $driver,
                 implode(
-                    array_keys($drivers),
-                    ', '
+                    ', ',
+                    array_keys($drivers)
                 )
             );
 
