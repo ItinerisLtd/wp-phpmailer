@@ -272,7 +272,7 @@ Then, install `wp-phpmailer.zip` [as usual](https://codex.wordpress.org/Managing
 
 ```bash
 # Make sure you use the same PHP version as remote servers.
-# Building inside docker images is recommanded.
+# Building inside docker images is recommended.
 php -v
 
 # Checkout source code
