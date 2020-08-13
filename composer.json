@@ -30,8 +30,8 @@
     },
     "conflict": {
         "itinerisltd/phpmailer-mailhog": "*",
-        "johnpbloch/wordpress-core": "^5.5",
-        "roots/wordpress": "^5.5",
+        "johnpbloch/wordpress-core": "<5.5",
+        "roots/wordpress": "<5.5",
         "wpackagist-plugin/sendgrid-email-delivery-simplified": "*"
     },
     "require-dev": {
@@ -42,7 +42,7 @@
         "phpstan/phpstan": "^0.12.3",
         "phpstan/phpstan-strict-rules": "^0.12.0",
         "roave/security-advisories": "dev-master",
-        "roots/wordpress": "^5.3"
+        "roots/wordpress": "^5.5"
     },
     "config": {
         "sort-packages": true
