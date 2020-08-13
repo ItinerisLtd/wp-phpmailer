@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Itineris\WPPHPMailer;
 
-use PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class Plugin
 {
