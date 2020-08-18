@@ -246,7 +246,7 @@ add_action( 'phpmailer_init', function (PHPMailer $phpmailer) {
 ## Minimum Requirements
 
 - PHP v7.2
-- WordPress v5.1
+- WordPress v5.5
 
 ## Installation
 
