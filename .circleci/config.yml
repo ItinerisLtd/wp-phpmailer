@@ -1,11 +1,11 @@
 version: 2.1
 
 orbs:
-  composer: itinerisltd/composer@0.3
+  php: circleci/php@1
 
   itinerisltd:
     orbs:
-      composer: itinerisltd/composer@0.3
+      php: circleci/php@1
 
     executors:
       default:
@@ -18,10 +18,9 @@ orbs:
           zip:
             type: string
             description: path to plugin zip file
-          executor:
-            type: executor
-            default: composer/php-72
-        executor: << parameters.executor >>
+        executor:
+          name: php/default
+          tag: "7.2"
         steps:
           - run: unzip << parameters.zip >> -d /tmp/plugin-source-code
           - run: find /tmp/plugin-source-code -name "*.php" -print0 | xargs -n 1 -0 php -l
@@ -35,54 +34,40 @@ orbs:
             type: string
             description: directory path of the artifacts to be uploaded
             default: .
-          executor:
-            type: executor
-            default: default
-        executor: << parameters.executor >>
+        executor:
+          name: php/default
+          tag: "7.2"
         steps:
           - run: ghr -t << parameters.github_token >> -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -soft ${CIRCLE_TAG} << parameters.artifact_dir >>
 
 workflows:
   test:
     jobs:
-      - composer/install:
-          name: test-latest
-          executor: composer/latest
-          post-steps:
-            - composer/exec:
-                command: test
+      - php/test:
+          name: php-<< matrix.version >>
+          matrix:
+            parameters:
+              version: ["7.4", "7.3", "7.2"]
 
-      - composer/install:
-          name: test-7.2
-          executor: composer/php-72
-          post-steps:
-            - composer/exec:
-                command: test
-
-      - composer/install:
+      - php/test:
           name: style-check
-          post-steps:
-            - composer/exec:
-                command: style:check
+          test-command: style:check
 
-      - composer/install:
+      - php/test:
           name: phpstan-analyse
-          post-steps:
-            - composer/exec:
-                command: phpstan:analyse
+          test-command: phpstan:analyse
 
   # TODO: Extract orbs
   # TODO: Commit wo.org svn
   build_release:
     jobs:
-      - composer/install:
+      - php/test:
           name: build
+          test-command: release:build
           # Build with lowest support PHP version
           # wp.org svn pre-commit hook rejects PHP 7.3+ syntax
-          executor: composer/php-72
+          version: "7.2"
           post-steps:
-            - composer/exec:
-                command: release:build
             - store_artifacts:
                 path: release
             - persist_to_workspace:
