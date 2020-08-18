@@ -4,7 +4,7 @@
  * Plugin Name:     WP PHPMailer
  * Plugin URI:      https://github.com/ItinerisLtd/wp-phpmailer
  * Description:     WP PHPMailer provides a clean and simple way to configure WordPress-bundled PHPMailer library, allowing you to quickly get started sending mail through a local or cloud based service of your choice.
- * Version:         0.1.2
+ * Version:         0.1.5
  * Author:          Itineris Limited
  * Author URI:      https://itineris.co.uk
  * License:         MIT

@@ -50,7 +50,6 @@
   - [Where can I give :star::star::star::star::star: reviews?](#where-can-i-give-starstarstarstarstar-reviews)
 - [Testing](#testing)
 - [Feedback](#feedback)
-- [Change Log](#change-log)
 - [Security](#security)
 - [Credits](#credits)
 - [License](#license)
@@ -368,10 +367,6 @@ Pull requests without tests will not be accepted!
 **Please provide feedback!** We want to make this library useful in as many projects as possible.
 Please submit an [issue](https://github.com/ItinerisLtd/wp-phpmailer/issues/new) and point out what you do and don't like, or fork the project and make suggestions.
 **No issue is too small.**
-
-## Change Log
-
-Please see [CHANGELOG](./CHANGELOG.md) for more information on what has changed recently.
 
 ## Security
 
