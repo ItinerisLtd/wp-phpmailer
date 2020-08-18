@@ -369,10 +369,6 @@ Pull requests without tests will not be accepted!
 Please submit an [issue](https://github.com/ItinerisLtd/wp-phpmailer/issues/new) and point out what you do and don't like, or fork the project and make suggestions.
 **No issue is too small.**
 
-## Change Log
-
-Please see [CHANGELOG](./CHANGELOG.md) for more information on what has changed recently.
-
 ## Security
 
 If you discover any security related issues, please email [dev@itineris.co.uk](mailto:dev@itineris.co.uk) instead of using the issue tracker.
