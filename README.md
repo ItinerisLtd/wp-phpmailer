@@ -50,7 +50,6 @@
   - [Where can I give :star::star::star::star::star: reviews?](#where-can-i-give-starstarstarstarstar-reviews)
 - [Testing](#testing)
 - [Feedback](#feedback)
-- [Change Log](#change-log)
 - [Security](#security)
 - [Credits](#credits)
 - [License](#license)

@@ -30,9 +30,9 @@
     },
     "conflict": {
         "itinerisltd/phpmailer-mailhog": "*",
-        "wpackagist-plugin/sendgrid-email-delivery-simplified": "*",
         "johnpbloch/wordpress-core": "^5.5",
-        "roots/wordpress": "^5.5"
+        "roots/wordpress": "^5.5",
+        "wpackagist-plugin/sendgrid-email-delivery-simplified": "*"
     },
     "require-dev": {
         "10up/wp_mock": "^0.4.2",
