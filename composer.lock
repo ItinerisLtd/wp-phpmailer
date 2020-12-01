@@ -1441,16 +1441,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.5.12",
+            "version": "8.5.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f40cf5be80a7d177494592ad1b2db3f64ea1dee3"
+                "reference": "8e86be391a58104ef86037ba8a846524528d784e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f40cf5be80a7d177494592ad1b2db3f64ea1dee3",
-                "reference": "f40cf5be80a7d177494592ad1b2db3f64ea1dee3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8e86be391a58104ef86037ba8a846524528d784e",
+                "reference": "8e86be391a58104ef86037ba8a846524528d784e",
                 "shasum": ""
             },
             "require": {
@@ -1530,7 +1530,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-30T12:23:30+00:00"
+            "time": "2020-12-01T04:53:52+00:00"
         },
         {
             "name": "psr/container",
