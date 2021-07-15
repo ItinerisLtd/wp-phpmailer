@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Itineris\WPPHPMailer;
 
+use Itineris\WPPHPMailer\Drivers\SMTPDriver;
 use Itineris\WPPHPMailer\Drivers\MailHogDriver;
 use Itineris\WPPHPMailer\Drivers\MailtrapDriver;
 use Itineris\WPPHPMailer\Drivers\Office365Driver;
@@ -13,6 +14,7 @@ use Itineris\WPPHPMailer\Exceptions\NotFoundException;
 class ConfigFactory
 {
     protected const DRIVERS = [
+        'smtp' => SMTPDriver::class,
         'mailhog' => MailHogDriver::class,
         'mailtrap' => MailtrapDriver::class,
         'office365' => Office365Driver::class,
