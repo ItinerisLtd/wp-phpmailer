@@ -746,16 +746,16 @@
         },
         {
             "name": "phar-io/manifest",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/manifest.git",
-                "reference": "85265efd3af7ba3ca4b2a2c34dbfc5788dd29133"
+                "reference": "581196202f9418ec46da57427e05656b0cfe8702"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/manifest/zipball/85265efd3af7ba3ca4b2a2c34dbfc5788dd29133",
-                "reference": "85265efd3af7ba3ca4b2a2c34dbfc5788dd29133",
+                "url": "https://api.github.com/repos/phar-io/manifest/zipball/581196202f9418ec46da57427e05656b0cfe8702",
+                "reference": "581196202f9418ec46da57427e05656b0cfe8702",
                 "shasum": ""
             },
             "require": {
@@ -798,7 +798,7 @@
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
-            "time": "2020-06-27T14:33:11+00:00"
+            "time": "2021-07-20T11:12:10+00:00"
         },
         {
             "name": "phar-io/version",
@@ -1672,12 +1672,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "fc5e5d772af47d035df8178172391259b6e30566"
+                "reference": "736d41298189b79074e555d056bfe040b4970f47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/fc5e5d772af47d035df8178172391259b6e30566",
-                "reference": "fc5e5d772af47d035df8178172391259b6e30566",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/736d41298189b79074e555d056bfe040b4970f47",
+                "reference": "736d41298189b79074e555d056bfe040b4970f47",
                 "shasum": ""
             },
             "conflict": {
@@ -1766,6 +1766,7 @@
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
                 "friendsoftypo3/mediace": ">=7.6.2,<7.6.5",
+                "froala/wysiwyg-editor": "<3.2.7",
                 "fuel/core": "<1.8.1",
                 "getgrav/grav": "<=1.7.10",
                 "getkirby/cms": "<=3.5.6",
@@ -2036,7 +2037,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-13T18:03:10+00:00"
+            "time": "2021-07-19T22:02:46+00:00"
         },
         {
             "name": "roots/wordpress",
