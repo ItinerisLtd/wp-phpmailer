@@ -30,7 +30,7 @@ class ConfigFactoryTest extends Unit
             ->once();
 
         WP_Mock::expectFilter('wp_phpmailer_drivers', [
-            'smtp' => SMTPDriver:class,
+            'smtp' => SMTPDriver::class,
             'mailhog' => MailHogDriver::class,
             'mailtrap' => MailtrapDriver::class,
             'office365' => Office365Driver::class,
@@ -55,7 +55,7 @@ class ConfigFactoryTest extends Unit
                      ->once();
 
         WP_Mock::expectFilter('wp_phpmailer_drivers', [
-            'smtp' => SMTPDriver:class,
+            'smtp' => SMTPDriver::class,
             'mailhog' => MailHogDriver::class,
             'mailtrap' => MailtrapDriver::class,
             'office365' => Office365Driver::class,
