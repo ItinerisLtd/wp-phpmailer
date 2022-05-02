@@ -37,7 +37,7 @@ class ConfigFactoryTest extends Unit
             'smtp' => SMTPDriver::class,
         ]);
 
-        $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: smtp, mailhog, mailtrap, office365, sendgrid");
+        $expected = new NotFoundException("Driver 'non-exist-driver' not found, acceptable values are: mailhog, mailtrap, office365, sendgrid, smtp");
 
         $this->tester->expectThrowable($expected, function () use ($constantRepo): void {
             ConfigFactory::make($constantRepo);
