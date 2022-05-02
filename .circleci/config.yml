@@ -34,9 +34,7 @@ orbs:
             type: string
             description: directory path of the artifacts to be uploaded
             default: .
-        executor:
-          name: php/default
-          tag: "7.2"
+        executor: default
         steps:
           - run: ghr -t << parameters.github_token >> -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -soft ${CIRCLE_TAG} << parameters.artifact_dir >>
 
