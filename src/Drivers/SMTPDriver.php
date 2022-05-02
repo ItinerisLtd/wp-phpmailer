@@ -16,7 +16,7 @@ class SMTPDriver implements \Itineris\WPPHPMailer\Drivers\DriverInterface
 
         $config->set(
             'auth',
-            $constantRepo->get('SMTP_AUTH') ?: true
+            $constantRepo->get('SMTP_AUTH') ?? true
         );
 
         $config->set(
@@ -26,12 +26,12 @@ class SMTPDriver implements \Itineris\WPPHPMailer\Drivers\DriverInterface
 
         $config->set(
             'port',
-            $constantRepo->get('SMTP_PORT') ?: 587
+            $constantRepo->get('SMTP_PORT') ?? 587
         );
 
         $config->set(
             'protocol',
-            $constantRepo->get('SMTP_PROTOCOL') ?: 'tls'
+            $constantRepo->get('SMTP_PROTOCOL') ?? 'tls'
         );
 
         $config->set(
